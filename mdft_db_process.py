@@ -30,11 +30,20 @@ mdft_args = arg_parser.parse_args()
 if mdft_args.database == None:
     sys.exit("Please indicate an input database !")
 
-if mdft_args.bridge == 'none' :
-    input_mdft = mdft_args.database+'/'
-else:
-    input_mdft = mdft_args.database+ "_"+ mdft_args.bridge +'/'
-    
+
+
+input_mdft = mdft_args.database
+
+input_mdft+="_"+str(mdft_args.mmax)
+
+
+if mdft_args.bridge != 'none' :
+    input_mdft += "_"+ mdft_args.bridge
+if mdft_args.mdftcommit is not None :
+    input_mdft += "_"+ mdft_args.mdftcommit
+        
+input_mdft += '/'
+
 
 # Creation of a directory whose name is database's
 if os.path.exists(input_mdft) == False:
